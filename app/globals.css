@@ -63,11 +63,19 @@ body {
     );
   }
 
-  .tab {
+  /* .tab {
     @apply min-h-full dark:bg-dark-400 bg-light-800 text-light-500 
     dark:data-
     [state=active]: bg-dark-300 data-
     [state=active]: bg-primary-100 data-
+    [state=active]: text-primary-500 !important;
+  } */
+
+  .tab {
+    @apply min-h-full dark:bg-dark-400 bg-light-800 
+    dark:data-
+    [state=active]: data-
+    [state=active]: data-
     [state=active]: text-primary-500 !important;
   }
 }
