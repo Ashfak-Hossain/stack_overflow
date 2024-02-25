@@ -1,9 +1,39 @@
 import Filter from '@/components/shared/Filter';
 import HomeFilters from '@/components/shared/Home/HomeFilters';
+import NoResult from '@/components/shared/NoResult';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
 import Link from 'next/link';
+
+const questions = [
+  {
+    _id: 1,
+    title: 'Cascading deletes a SQLAlchemy?',
+    tags: [
+      { _id: 1, name: 'Python' },
+      { _id: 2, name: 'SQL' },
+    ],
+    author: 'Ashfak Hossain',
+    upvotes: 10,
+    views: 180,
+    answers: 2,
+    createdAt: '2021-09-01T00:00:00.000Z',
+  },
+  {
+    _id: 2,
+    title: 'How to integrate a Java script with SQL?',
+    tags: [
+      { _id: 1, name: 'Java' },
+      { _id: 2, name: 'SQL' },
+    ],
+    author: 'Mugdha',
+    upvotes: 10,
+    views: 180,
+    answers: 2,
+    createdAt: '2021-09-01T00:00:00.000Z',
+  },
+];
 
 export default function Home() {
   return (
@@ -34,6 +64,19 @@ export default function Home() {
       </div>
 
       <HomeFilters />
+
+      <div className="mt-10 flex w-full flex-col gap-6">
+        {questions.length > 0 ? (
+          questions.map((question) => 'QuestionCard.tsx')
+        ) : (
+          <NoResult
+            title="There's no question to show"
+            description="Be the first to break the silence! Ask a question and kickstart the discussion. Out query could be the next big thing others learn from. Get involved!"
+            link="/ask-question"
+            linkTitle="Ask a Question"
+          />
+        )}
+      </div>
     </>
   );
 }
