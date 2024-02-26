@@ -11,21 +11,29 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { createQuestion } from '@/lib/actions/question.action';
 import { QuestionSchema } from '@/lib/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Editor } from '@tinymce/tinymce-react';
 import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Badge } from '../ui/badge';
-import { createQuestion } from '@/lib/actions/question.action';
 
 const type: any = 'create';
 
-export default function Question() {
+interface Props {
+  mongoUserId: string;
+}
+
+export default function Question({ mongoUserId }: Props) {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
@@ -39,11 +47,16 @@ export default function Question() {
   async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     setIsSubmitting(true);
     try {
-      // make a async call to the server to create the question
       // contain all form data
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explaination,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId),
+      });
 
       // navigate to home page
+      router.push('/');
     } catch (error) {
     } finally {
       setIsSubmitting(false);
