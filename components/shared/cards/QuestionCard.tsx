@@ -59,7 +59,7 @@ export default function QuestionCard({
           title={` - asked ${getTimeStamp(createdAt)} ago`}
           href={`/profile/{$author._id}`}
           isAuthor
-          textStyles="body-medium text-400_ligh700"
+          textStyles="body-medium text-dark400_light700"
         />
 
         <Metric
@@ -67,21 +67,21 @@ export default function QuestionCard({
           alt="Upvotes"
           value={formatAndDivideNumber(upvotes)}
           title="Votes"
-          textStyles="small-medium text-400_light800"
+          textStyles="small-medium text-dark400_light800"
         />
         <Metric
           imgUrl="/assets/icons/message.svg"
           alt="message"
           value={formatAndDivideNumber(answers.length)}
           title="Answers"
-          textStyles="small-medium text-400_light800"
+          textStyles="small-medium text-dark400_light800"
         />
         <Metric
           imgUrl="/assets/icons/eye.svg"
           alt="eye"
           value={formatAndDivideNumber(views)}
           title="Views"
-          textStyles="small-medium text-400_light800"
+          textStyles="small-medium text-dark400_light800"
         />
       </div>
     </div>
