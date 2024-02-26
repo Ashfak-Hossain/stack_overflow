@@ -1,50 +1,16 @@
-import Filter from '@/components/shared/Filter';
 import HomeFilters from '@/components/Home/HomeFilters';
-import NoResult from '@/components/shared/NoResult';
 import QuestionCard from '@/components/cards/QuestionCard';
+import Filter from '@/components/shared/Filter';
+import NoResult from '@/components/shared/NoResult';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
+import { getQuestions } from '@/lib/actions/question.action';
 import Link from 'next/link';
 
-const questions = [
-  {
-    _id: '1',
-    title: 'Cascading deletes in SQLAlchemy?',
-    tags: [
-      { _id: '1', name: 'Python' },
-      { _id: '2', name: 'SQL' },
-    ],
-    author: {
-      _id: '101',
-      name: 'Ashfak Hossain',
-      picture: 'url_to_author_picture',
-    },
-    upvotes: 1234240,
-    views: 18432330,
-    answers: [],
-    createdAt: new Date('2024-02-01T00:00:00.000Z'),
-  },
-  {
-    _id: '2',
-    title: 'How to integrate JavaScript with SQL and execute queries ?',
-    tags: [
-      { _id: '3', name: 'JavaScript' },
-      { _id: '2', name: 'SQL' },
-    ],
-    author: {
-      _id: '102',
-      name: 'Mugdha',
-      picture: 'url_to_author_picture',
-    },
-    upvotes: 15224,
-    views: 22320,
-    answers: [],
-    createdAt: new Date('2021-09-02T00:00:00.000Z'),
-  },
-];
+export default async function Home() {
+  const result = await getQuestions({});
 
-export default function Home() {
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -75,8 +41,8 @@ export default function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
