@@ -5,56 +5,56 @@ import RenderTag from './RenderTag';
 export default function RightSidebar() {
   const hotQuestions = [
     {
-      _id: 1,
+      _id: '1',
       title: 'How to create a new component in React?',
     },
     {
-      _id: 2,
+      _id: '2',
       title: 'How to create a new component in React?',
     },
     {
-      _id: 3,
+      _id: '3',
       title: 'How to create a new component in React?',
     },
     {
-      _id: 4,
+      _id: '4',
       title:
         'Best practices for data fetching in a next.js application with server side rendering?',
     },
     {
-      _id: 5,
+      _id: '5',
       title: 'How to create a new component in React?',
     },
   ];
 
   const popularTags = [
     {
-      _id: 1,
+      _id: '1',
       name: 'React',
       totalQuestions: 100,
     },
     {
-      _id: 2,
+      _id: '2',
       name: 'Next.js',
       totalQuestions: 100,
     },
     {
-      _id: 3,
+      _id: '3',
       name: 'TypeScript',
       totalQuestions: 20,
     },
     {
-      _id: 4,
+      _id: '4',
       name: 'JavaScript',
       totalQuestions: 60,
     },
     {
-      _id: 5,
+      _id: '5',
       name: 'React',
       totalQuestions: 98,
     },
     {
-      _id: 6,
+      _id: '6',
       name: 'Next.js',
       totalQuestions: 24,
     },

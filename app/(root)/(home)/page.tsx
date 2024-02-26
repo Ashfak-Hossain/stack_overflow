@@ -1,6 +1,7 @@
 import Filter from '@/components/shared/Filter';
 import HomeFilters from '@/components/shared/Home/HomeFilters';
 import NoResult from '@/components/shared/NoResult';
+import QuestionCard from '@/components/shared/cards/QuestionCard';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
@@ -8,30 +9,38 @@ import Link from 'next/link';
 
 const questions = [
   {
-    _id: 1,
-    title: 'Cascading deletes a SQLAlchemy?',
+    _id: '1',
+    title: 'Cascading deletes in SQLAlchemy?',
     tags: [
-      { _id: 1, name: 'Python' },
-      { _id: 2, name: 'SQL' },
+      { _id: '1', name: 'Python' },
+      { _id: '2', name: 'SQL' },
     ],
-    author: 'Ashfak Hossain',
-    upvotes: 10,
-    views: 180,
-    answers: 2,
-    createdAt: '2021-09-01T00:00:00.000Z',
+    author: {
+      _id: '101',
+      name: 'Ashfak Hossain',
+      picture: 'url_to_author_picture',
+    },
+    upvotes: 1234240,
+    views: 18432330,
+    answers: [],
+    createdAt: new Date('2024-02-01T00:00:00.000Z'),
   },
   {
-    _id: 2,
-    title: 'How to integrate a Java script with SQL?',
+    _id: '2',
+    title: 'How to integrate JavaScript with SQL and execute queries ?',
     tags: [
-      { _id: 1, name: 'Java' },
-      { _id: 2, name: 'SQL' },
+      { _id: '3', name: 'JavaScript' },
+      { _id: '2', name: 'SQL' },
     ],
-    author: 'Mugdha',
-    upvotes: 10,
-    views: 180,
-    answers: 2,
-    createdAt: '2021-09-01T00:00:00.000Z',
+    author: {
+      _id: '102',
+      name: 'Mugdha',
+      picture: 'url_to_author_picture',
+    },
+    upvotes: 15224,
+    views: 22320,
+    answers: [],
+    createdAt: new Date('2021-09-02T00:00:00.000Z'),
   },
 ];
 
@@ -67,7 +76,19 @@ export default function Home() {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {questions.length > 0 ? (
-          questions.map((question) => 'QuestionCard.tsx')
+          questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              views={question.views}
+              answers={question.answers}
+              createdAt={question.createdAt}
+            />
+          ))
         ) : (
           <NoResult
             title="There's no question to show"
