@@ -6,10 +6,6 @@ import User from '@/database/user.model';
 import { revalidatePath } from 'next/cache';
 import { connectToDatabase } from '../mongoose';
 import { CreateQuestionParams, GetQuestionsParams } from './shared.types';
-import {
-  QuestionNotFoundError,
-  QuestionCreationError,
-} from '@/errors/QuestionError';
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -22,12 +18,8 @@ export async function getQuestions(params: GetQuestionsParams) {
 
     return { questions };
   } catch (error) {
-    if (error instanceof QuestionNotFoundError) {
-      console.error(error.name, error.message);
-    } else {
-      console.error('Unexpected error', error);
-      throw error;
-    }
+    console.error(error);
+    throw error;
   }
 }
 
@@ -63,11 +55,7 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     revalidatePath(path);
   } catch (error) {
-    if (error instanceof QuestionCreationError) {
-      console.error(error.name, error.message);
-    } else {
-      console.error('Unexpected error', error);
-      throw error;
-    }
+    console.error(error);
+    throw error;
   }
 }

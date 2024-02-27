@@ -2,12 +2,6 @@
 
 import Question from '@/database/question.model';
 import User from '@/database/user.model';
-import {
-  UserCreationError,
-  UserDeletionError,
-  UserNotFoundError,
-  UserUpdateError,
-} from '@/errors/UserError';
 import { revalidatePath } from 'next/cache';
 import { connectToDatabase } from '../mongoose';
 import {
@@ -28,12 +22,8 @@ export async function getUserById(params: any) {
 
     return user;
   } catch (error) {
-    if (error instanceof UserNotFoundError) {
-      console.error(error.name, error.message);
-    } else {
-      console.error('Unexpected error', error);
-      throw error;
-    }
+    console.error(error);
+    throw error;
   }
 }
 
@@ -45,12 +35,8 @@ export async function createUser(userData: CreateUserParams) {
 
     return newUser;
   } catch (error) {
-    if (error instanceof UserCreationError) {
-      console.error(error.name, error.message);
-    } else {
-      console.error('Unexpected error', error);
-      throw error;
-    }
+    console.error(error);
+    throw error;
   }
 }
 export async function updateUser(params: UpdateUserParams) {
@@ -65,12 +51,8 @@ export async function updateUser(params: UpdateUserParams) {
 
     revalidatePath(path);
   } catch (error) {
-    if (error instanceof UserUpdateError) {
-      console.error(error.name, error.message);
-    } else {
-      console.error('Unexpected error', error);
-      throw error;
-    }
+    console.error(error);
+    throw error;
   }
 }
 
@@ -83,7 +65,7 @@ export async function deleteUser(params: DeleteUserParams) {
     const user = await User.findOneAndDelete({ clerkId });
 
     if (!user) {
-      throw new UserNotFoundError('User not found');
+      throw new Error('User not found');
     }
 
     // eslint-disable-next-line no-unused-vars
@@ -99,11 +81,7 @@ export async function deleteUser(params: DeleteUserParams) {
 
     return deletedUser;
   } catch (error) {
-    if (error instanceof UserDeletionError) {
-      console.error(error.name, error.message);
-    } else {
-      console.error('Unexpected error', error);
-      throw error;
-    }
+    console.error(error);
+    throw error;
   }
 }
