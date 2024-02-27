@@ -7,9 +7,9 @@ import { revalidatePath } from 'next/cache';
 import { connectToDatabase } from '../mongoose';
 import { CreateQuestionParams, GetQuestionsParams } from './shared.types';
 import {
-  QuestionCreationError,
   QuestionNotFoundError,
-} from '@/errors/question';
+  QuestionCreationError,
+} from '@/errors/QuestionError';
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {

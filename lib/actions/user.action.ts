@@ -7,7 +7,7 @@ import {
   UserDeletionError,
   UserNotFoundError,
   UserUpdateError,
-} from '@/errors/User';
+} from '@/errors/UserError';
 import { revalidatePath } from 'next/cache';
 import { connectToDatabase } from '../mongoose';
 import {
