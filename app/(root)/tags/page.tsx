@@ -1,7 +1,7 @@
 import Filter from '@/components/shared/Filter';
 import NoResult from '@/components/shared/NoResult';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
-import { UseFilters } from '@/constants/filters';
+import { TagFilters } from '@/constants/filters';
 import { getAllTags } from '@/lib/actions/tag.action';
 import Link from 'next/link';
 
@@ -22,7 +22,7 @@ export default async function page() {
         />
 
         <Filter
-          filters={UseFilters}
+          filters={TagFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
