@@ -14,7 +14,7 @@ export interface Job {
   job_employment_type?: string;
   job_title?: string;
   job_description?: string;
-  job_appl_link?: string;
+  job_apply_link?: string;
   job_city?: string;
   job_state?: string;
   job_country?: string;

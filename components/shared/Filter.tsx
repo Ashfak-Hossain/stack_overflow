@@ -41,7 +41,7 @@ export default function Filter({
                 <SelectItem
                   key={item.value}
                   value={item.value}
-                  className="bg-light-800 text-light-500 hover:bg-light-700 dark:bg-dark-300 dark:text-light-500 dark:hover:bg-dark-500"
+                  className="bg-light-800 text-dark-500 hover:bg-light-700 dark:bg-dark-300 dark:text-light-500 dark:hover:bg-dark-500"
                 >
                   {item.name}
                 </SelectItem>
