@@ -7,6 +7,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import React from 'react';
 import './globals.css';
+import '../styles/prism.css';
 
 const inter = Inter({
   subsets: ['latin'],
