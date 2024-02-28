@@ -5,8 +5,8 @@ export interface IQuestion extends Document {
   content: string;
   tags: Schema.Types.ObjectId[];
   views: number;
-  upvotes: Schema.Types.ObjectId[];
-  downvotes: Schema.Types.ObjectId[];
+  upVotes: Schema.Types.ObjectId[];
+  downVotes: Schema.Types.ObjectId[];
   author: Schema.Types.ObjectId;
   answers: Schema.Types.ObjectId[];
   createdAt: Date;
@@ -35,14 +35,14 @@ const QuestionSchema = new Schema<IQuestion>({
     default: 0,
   },
 
-  upvotes: [
+  upVotes: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
   ],
 
-  downvotes: [
+  downVotes: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
