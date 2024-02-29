@@ -1,6 +1,7 @@
 'use client';
 
 import { downvoteAnswer, upvoteAnswer } from '@/lib/actions/answer.action';
+import { viewQuestion } from '@/lib/actions/interaction.action';
 import {
   downvoteQuestion,
   upvoteQuestion,
@@ -8,7 +9,9 @@ import {
 import { toggleSaveQuestion } from '@/lib/actions/user.action';
 import { formatAndDivideNumber } from '@/lib/utils';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { undefined } from 'zod';
 
 interface Props {
   type: string;
@@ -33,7 +36,7 @@ export default function Votes({
 }: Props) {
   const pathname = usePathname();
 
-  // const router = useRouter();
+  const router = useRouter();
 
   upvotes = upvotes || 0;
   downvotes = downvotes || 0;
@@ -96,6 +99,14 @@ export default function Votes({
       // return;
     }
   };
+
+  useEffect(() => {
+    viewQuestion({
+      questionId: JSON.parse(itemId),
+      userId: userId ? JSON.parse(userId) : undefined,
+    });
+    // alert('Yooooo');
+  }, [itemId, userId, pathname, router]);
 
   return (
     <div className="flex gap-5">
