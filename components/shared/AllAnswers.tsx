@@ -54,13 +54,21 @@ export default async function AllAnswers({
                       {answer.author.name}
                     </p>
                     <p className="small-regular text-light400_light500 ml-2 mt-0.5 line-clamp-1">
-                      <span className="max-sm:hidden"> answerd</span>
+                      <span className="max-sm:hidden"> answerd </span>
                       {getTimeStamp(answer.createdAt)}
                     </p>
                   </div>
                 </Link>
                 <div className="flex justify-end">
-                  <Votes />
+                  <Votes
+                    type="Answer"
+                    itemId={JSON.stringify(answer._id)}
+                    userId={JSON.stringify(userId)}
+                    upvotes={answer.upvotes.length}
+                    hasupVoted={answer.upvotes.includes(userId)}
+                    downvotes={answer.downvotes.length}
+                    hasdownVoted={answer.downvotes.includes(userId)}
+                  />
                 </div>
               </div>
 
