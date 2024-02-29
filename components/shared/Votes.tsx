@@ -5,9 +5,10 @@ import {
   downvoteQuestion,
   upvoteQuestion,
 } from '@/lib/actions/question.action';
+import { toggleSaveQuestion } from '@/lib/actions/user.action';
 import { formatAndDivideNumber } from '@/lib/utils';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 interface Props {
   type: string;
@@ -31,13 +32,19 @@ export default function Votes({
   hasSaved,
 }: Props) {
   const pathname = usePathname();
-  // eslint-disable-next-line no-unused-vars
-  const router = useRouter();
+
+  // const router = useRouter();
 
   upvotes = upvotes || 0;
   downvotes = downvotes || 0;
 
-  const handleSave = async () => {};
+  const handleSave = async () => {
+    await toggleSaveQuestion({
+      questionId: JSON.parse(itemId),
+      userId: JSON.parse(userId),
+      path: pathname,
+    });
+  };
 
   const handleVote = async (action: string) => {
     if (!userId) {
