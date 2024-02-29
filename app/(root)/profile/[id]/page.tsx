@@ -1,3 +1,4 @@
+import AnswerTab from '@/components/shared/AnswerTab';
 import ProfileLink from '@/components/shared/ProfileLink';
 import QuestionTab from '@/components/shared/QuestionTab';
 import Stats from '@/components/shared/Stats';
@@ -87,9 +88,19 @@ export default async function page({ params, searchParams }: URLProps) {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="top-posts">
-            <QuestionTab />
+            <QuestionTab
+              userId={userInfo.user._id}
+              SearchParams={searchParams}
+              clerkId={clerkId}
+            />
           </TabsContent>
-          <TabsContent value="answers">AnswerTab</TabsContent>
+          <TabsContent value="answers">
+            <AnswerTab
+              userId={userInfo.user._id}
+              SearchParams={searchParams}
+              clerkId={clerkId}
+            />
+          </TabsContent>
         </Tabs>
       </div>
     </>
