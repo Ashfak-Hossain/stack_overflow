@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 
-import { ThemeProvider } from '@/context/ThemeProvider';
+import ThemeProvider from '@/context/ThemeProvider';
 import { inter, spaceGrotesk } from '@/fonts/fonts';
 import { ClerkProvider } from '@clerk/nextjs';
 

@@ -1,7 +1,12 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import MobileNav from '@/components/shared/navbar/MobileNav';
+import Theme from '@/components/shared/navbar/Theme';
+import GlobalSearch from '@/components/shared/search/GlobalSearch';
 import { SignedIn, UserButton } from '@clerk/nextjs';
 
 const Navbar = () => {
@@ -18,9 +23,15 @@ const Navbar = () => {
           Dev<span className="text-primary-500">Overflow</span>
         </p>
       </Link>
-      Global Search
+
+      {/* Global Search */}
+      <GlobalSearch />
+
       <div className="flex-between gap-5">
-        Theme
+        {/* Theme switch */}
+        <Theme />
+
+        {/* if signed in, show User Button */}
         <SignedIn>
           <UserButton
             appearance={{
@@ -33,7 +44,7 @@ const Navbar = () => {
             }}
           />
         </SignedIn>
-        Mobile nav
+        <MobileNav />
       </div>
     </nav>
   );
