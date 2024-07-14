@@ -1,13 +1,52 @@
 import React from 'react';
 import Link from 'next/link';
 
+import QuestionCard from '@/components/Cards/QuestionCard';
 import HomeFilters from '@/components/Home/HomeFilters';
 import Filter from '@/components/shared/Filter';
+import NoResult from '@/components/shared/NoResult';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
 
 const Home = () => {
+  const questions = [
+    {
+      _id: '1',
+      title: 'How to use React Query',
+      tags: [
+        { _id: '1', name: 'React' },
+        { _id: '2', name: 'React Query' },
+      ],
+      author: {
+        _id: '1',
+        name: 'John Doe',
+        picture: '',
+      },
+      upvotes: 10,
+      views: 100,
+      answers: [],
+      createdAt: new Date(),
+    },
+    {
+      _id: '2',
+      title: 'How to use React Query',
+      tags: [
+        { _id: '1', name: 'React' },
+        { _id: '2', name: 'React Query' },
+      ],
+      author: {
+        _id: '1',
+        name: 'John Doe',
+        picture: '',
+      },
+      upvotes: 10,
+      views: 100,
+      answers: [],
+      createdAt: new Date(),
+    },
+  ];
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -36,7 +75,33 @@ const Home = () => {
         />
       </div>
 
+      {/* the tags will visible in large devices and hide in small, this is used in large devices instead of filter */}
       <HomeFilters />
+
+      <div className="mt-10 flex w-full flex-col gap-6">
+        {questions.length > 0 ? (
+          questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              views={question.views}
+              answers={question.answers}
+              createdAt={question.createdAt}
+            />
+          ))
+        ) : (
+          <NoResult
+            title="There's no question to show"
+            description="Be the first to break the silence! Ask a question and kickstart the discussion. Out query could be the next big thing others learn from. Get involved!"
+            link="/ask-question"
+            linkTitle="Ask a Question"
+          />
+        )}
+      </div>
     </>
   );
 };
