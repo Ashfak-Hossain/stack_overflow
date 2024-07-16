@@ -6,7 +6,6 @@ import Filter from '@/components/shared/Filter';
 import NoResult from '@/components/shared/NoResult';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { TagFilters } from '@/constants/filters';
-import type { SearchParamsProps } from '@/types';
 
 export const metadata: Metadata = {
   title: 'Tags — Stack Overflow',
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
     'Tags are a way of categorizing questions with similar topics. Find tags that interest you and explore questions related to them.',
 };
 
-const Page = async ({ SearchParams }: SearchParamsProps) => {
+const Page = async () => {
   const result = await getAllTags({});
 
   return (
