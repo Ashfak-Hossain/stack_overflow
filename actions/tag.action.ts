@@ -1,4 +1,7 @@
-import { GetTopInteractedTagsParams } from '@/actions/shared.types';
+import {
+  GetAllTagsParams,
+  GetTopInteractedTagsParams,
+} from '@/actions/shared.types';
 import Question from '@/database/question.model';
 import Tag from '@/database/tag.model';
 import User from '@/database/user.model';
@@ -29,6 +32,19 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
     });
 
     return tags;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getAllTags(params: GetAllTagsParams) {
+  try {
+    connectToDatabase();
+
+    const tags = await Tag.find({});
+
+    return { tags };
   } catch (error) {
     console.log(error);
     throw error;
