@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { Webhook } from 'svix';
 
-import { createUser } from '@/actions/user.action';
+import { createUser, deleteUser, updateUser } from '@/actions/user.action';
 import { WebhookEvent } from '@clerk/nextjs/server';
 
 export async function POST(req: Request) {
@@ -73,32 +73,32 @@ export async function POST(req: Request) {
   }
 
   // If the event is user.updated, update the user in the database
-  // if (eventType === 'user.updated') {
-  //   const { id, email_addresses, image_url, username, first_name, last_name } =
-  //     evt.data;
+  if (eventType === 'user.updated') {
+    const { id, email_addresses, image_url, username, first_name, last_name } =
+      evt.data;
 
-  //   // Update the user in the database
-  //   const mongoUser = await updateUser({
-  //     clerkId: id,
-  //     updateData: {
-  //       name: `${first_name}${last_name ? ` ${last_name}` : ' '}`,
-  //       username: username!,
-  //       email: email_addresses[0].email_address,
-  //       picture: image_url,
-  //     },
-  //     path: `/profile/${id}`,
-  //   });
-  //   return NextResponse.json({ message: 'OK', user: mongoUser });
-  // }
+    // Update the user in the database
+    const mongoUser = await updateUser({
+      clerkId: id,
+      updateData: {
+        name: `${first_name}${last_name ? ` ${last_name}` : ' '}`,
+        username: username!,
+        email: email_addresses[0].email_address,
+        picture: image_url,
+      },
+      path: `/profile/${id}`,
+    });
+    return NextResponse.json({ message: 'OK', user: mongoUser });
+  }
 
   // If the event is user.deleted, delete the user from the database
-  // if (eventType === 'user.deleted') {
-  //   const { id } = evt.data;
+  if (eventType === 'user.deleted') {
+    const { id } = evt.data;
 
-  //   const deletedUser = await deleteUser({ clerkId: id! });
+    const deletedUser = await deleteUser({ clerkId: id! });
 
-  //   return NextResponse.json({ message: 'OK', user: deletedUser });
-  // }
+    return NextResponse.json({ message: 'OK', user: deletedUser });
+  }
 
-  return new Response(' ', { status: 201 });
+  return new Response('', { status: 201 });
 }

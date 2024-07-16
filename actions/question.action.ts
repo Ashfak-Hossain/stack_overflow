@@ -5,12 +5,14 @@ import { revalidatePath } from 'next/cache';
 import {
   CreateQuestionParams,
   EditQuestionParams,
+  GetQuestionsParams,
 } from '@/actions/shared.types';
 import Question from '@/database/question.model';
 import Tag from '@/database/tag.model';
+import User from '@/database/user.model';
 import { connectToDatabase } from '@/lib/mongoose';
 
-export async function createQuestion(params: CreateQuestionParams) {
+export const createQuestion = async (params: CreateQuestionParams) => {
   try {
     connectToDatabase();
 
@@ -27,14 +29,11 @@ export async function createQuestion(params: CreateQuestionParams) {
     // Create tags if they don't exist and add the question to the tag document if it does
     for (const tag of tags) {
       const escapedTag = tag.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
-
-      //
       const existingTag = await Tag.findOneAndUpdate(
         { name: { $regex: new RegExp(`^${escapedTag}$`, 'i') } },
         { $setOnInsert: { name: tag }, $push: { questions: question._id } },
         { upsert: true, new: true }
       );
-
       tagDocuments.push(existingTag._id);
     }
 
@@ -51,7 +50,7 @@ export async function createQuestion(params: CreateQuestionParams) {
     console.error(error);
     throw error;
   }
-}
+};
 
 export const editQuestion = async (params: EditQuestionParams) => {
   try {
@@ -71,6 +70,22 @@ export const editQuestion = async (params: EditQuestionParams) => {
     revalidatePath(path);
   } catch (error) {
     console.log(error);
+    throw error;
+  }
+};
+
+export const getQuestions = async (params: GetQuestionsParams) => {
+  try {
+    connectToDatabase();
+
+    const questions = await Question.find({})
+      .populate({ path: 'tags', model: Tag })
+      .populate({ path: 'author', model: User })
+      .sort({ createdAt: -1 });
+
+    return { questions };
+  } catch (error) {
+    console.error(error);
     throw error;
   }
 };

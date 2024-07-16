@@ -1,5 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -14,10 +19,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { updateUser } from '@/lib/actions/user.action';
 import { ProfileSchema } from '@/lib/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 interface Props {
   clerkId: string;

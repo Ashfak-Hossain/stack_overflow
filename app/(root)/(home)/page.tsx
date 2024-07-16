@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
+import { getQuestions } from '@/actions/question.action';
 import QuestionCard from '@/components/Cards/QuestionCard';
 import HomeFilters from '@/components/Home/HomeFilters';
 import Filter from '@/components/shared/Filter';
@@ -9,43 +10,8 @@ import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
 
-const Home = () => {
-  const questions = [
-    {
-      _id: '1',
-      title: 'How to use React Query',
-      tags: [
-        { _id: '1', name: 'React' },
-        { _id: '2', name: 'React Query' },
-      ],
-      author: {
-        _id: '1',
-        name: 'John Doe',
-        picture: '',
-      },
-      upvotes: 10,
-      views: 100,
-      answers: [],
-      createdAt: new Date(),
-    },
-    {
-      _id: '2',
-      title: 'How to use React Query',
-      tags: [
-        { _id: '1', name: 'React' },
-        { _id: '2', name: 'React Query' },
-      ],
-      author: {
-        _id: '1',
-        name: 'John Doe',
-        picture: '',
-      },
-      upvotes: 10,
-      views: 100,
-      answers: [],
-      createdAt: new Date(),
-    },
-  ];
+const Home = async () => {
+  const result = await getQuestions({});
 
   return (
     <>
@@ -79,8 +45,8 @@ const Home = () => {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
