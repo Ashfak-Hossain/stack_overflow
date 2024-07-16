@@ -1,19 +1,25 @@
-import { clerkMiddleware } from '@clerk/nextjs/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-export default clerkMiddleware({});
+const isPublicRoute = createRouteMatcher([
+  '/sign-in(.*)',
+  '/sign-up(.*)',
+  '/',
+  '/api/webhooks',
+  '/question/:id',
+  '/tags',
+  '/tags/:id',
+  '/profile/:id',
+  '/community',
+  '/jobs',
+]);
+
+export default clerkMiddleware((auth, request) => {
+  if (!isPublicRoute(request)) {
+    auth().protect();
+  }
+});
 
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
 };
-
-// publicRoutes: [
-//     '/',
-//     '/api/webhook',
-//     '/question/:id',
-//     '/tags',
-//     '/tags/:id',
-//     '/profile/:id',
-//     '/community',
-//     '/jobs',
-//   ],
 //   ignoredRoutes: ['/api/webhook', '/api/chatgpt'],
