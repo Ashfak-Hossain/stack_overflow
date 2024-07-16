@@ -5,6 +5,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { updateUser } from '@/actions/user.action';
+import { ProfileSchema } from '@/actions/validations';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -15,10 +17,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { updateUser } from '@/lib/actions/user.action';
-import { ProfileSchema } from '@/lib/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
+
+import { Textarea } from '../ui/textarea';
 
 interface Props {
   clerkId: string;
