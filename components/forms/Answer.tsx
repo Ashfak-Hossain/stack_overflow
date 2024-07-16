@@ -6,20 +6,20 @@ import { usePathname } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useTheme } from '@/context/ThemeProvider';
-import { createAnswer } from '@/lib/actions/answer.action';
-import { AnswerSchema } from '@/lib/validations';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Editor } from '@tinymce/tinymce-react';
-
-import { Button } from '../ui/button';
+import { createAnswer } from '@/actions/answer.action';
+import { AnswerSchema } from '@/actions/validations';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '../ui/form';
+} from '@/components/ui/form';
+import { useTheme } from '@/context/ThemeProvider';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Editor } from '@tinymce/tinymce-react';
+
+import { Button } from '../ui/button';
 
 interface Props {
   question: string;
